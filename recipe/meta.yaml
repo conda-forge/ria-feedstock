@@ -1,3 +1,4 @@
+{% set python_min = '3.11' %}
 {% set name = "ria" %}
 {% set version = "0.1.1" %}
 
@@ -6,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ria-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/ria-{{ version }}.tar.gz
   sha256: d32879a4e1b3e102fc5d65338f623764fbfb197570e536a5dfd57197aeec74c5
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
@@ -18,10 +19,10 @@ build:
 
 requirements:
   host:
-    - python >=3.11
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.11
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -31,6 +32,7 @@ test:
     - meow --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/qoherent/ria
